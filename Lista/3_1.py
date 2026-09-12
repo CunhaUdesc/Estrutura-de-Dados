@@ -7,6 +7,29 @@ class ListaDupla:
         self.trailer = Node(None)
         self.size = 0
 
+    def size_list(self):
+        size = 0
+
+        atual = self.header
+        while atual is not None:
+            size += 1
+            atual = atual.next
+
+        return size     
+
+    def central_nodo(self):
+        ## Técnica dos dois ponteiros (um rápido e um lento)
+        point1 = self.header
+        point2 = self.header
+
+        tam = 0
+        while point2.next is not None:
+            tam += 1
+            point1 = point1.next
+            point2 = point2.next.next
+
+        return point1
+
     def is_empty(self):
         return self.size == 0
 
@@ -17,9 +40,8 @@ class ListaDupla:
             self.header.next = novo
             self.trailer.left = novo
         else:
-            novo.next = self.header.next
+            novo.proximo = self.header
             self.header.next = novo
-            novo.left = self.header
 
         self.size += 1
 
